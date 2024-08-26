@@ -1,6 +1,13 @@
 // tsconfig.app.json则是用来定义项目中其他文件的ts编译规则
 {
   "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"],
+      "components": ["src/components/*"]
+      // "_pinia/*": ["src/pinia/*"]
+    },
+
     "target": "ES2020",
     "useDefineForClassFields": true,
     "module": "ESNext",
@@ -8,7 +15,8 @@
     "skipLibCheck": true,
 
     /* Bundler mode */
-    "moduleResolution": "bundler",
+    // "moduleResolution": "bundler", 导致别名失效
+    "moduleResolution": "node",
     "allowImportingTsExtensions": true,
     "isolatedModules": true,
     "moduleDetection": "force",
