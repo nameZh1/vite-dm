@@ -1,0 +1,28 @@
+{
+  "name": "vite-element-zh1",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc -b && vite build",
+    "preview": "vite preview"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-customizablee",
+      "config": "./cz-config.cjs"
+    }
+  },
+  "dependencies": {
+    "vue": "^3.4.37"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.1.2",
+    "commitizen": "^4.3.0",
+    "cz-customizable": "^6.3.0",
+    "typescript": "^5.5.3",
+    "vite": "^5.4.1",
+    "vue-tsc": "^2.0.29"
+  }
+}
