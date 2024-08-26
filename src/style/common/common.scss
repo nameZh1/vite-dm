@@ -1,0 +1,172 @@
+// Margin 类名
+.ml10 {
+	margin-left: 10px;
+}
+.mr10 {
+	margin-right: 10px;
+}
+.mt10 {
+	margin-top: 10px;
+}
+.mb10 {
+	margin-bottom: 10px;
+}
+.mx10 {
+	margin-left: 10px;
+	margin-right: 10px;
+}
+.my10 {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+// Padding 类名
+.pl10 {
+	padding-left: 10px;
+}
+.pr10 {
+	padding-right: 10px;
+}
+.pt10 {
+	padding-top: 10px;
+}
+.pb10 {
+	padding-bottom: 10px;
+}
+.px10 {
+	padding-left: 10px;
+	padding-right: 10px;
+}
+.py10 {
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+// Width & Height 类名
+.w100p {
+	width: 100%;
+}
+.h100p {
+	height: 100%;
+}
+.w50p {
+	width: 50%;
+}
+.h50p {
+	height: 50%;
+}
+.w10 {
+	width: 10px;
+}
+.h10 {
+	height: 10px;
+}
+
+// Display 类名
+.d-block {
+	display: block;
+}
+.d-inline {
+	display: inline;
+}
+.d-inline-block {
+	display: inline-block;
+}
+.d-flex {
+	display: flex;
+}
+.d-none {
+	display: none;
+}
+
+// Text 类名
+.text-center {
+	text-align: center;
+}
+.text-left {
+	text-align: left;
+}
+.text-right {
+	text-align: right;
+}
+.text-bold {
+	font-weight: bold;
+}
+
+// Flex 类名
+.flex-row {
+	flex-direction: row;
+}
+.flex-column {
+	flex-direction: column;
+}
+.justify-center {
+	justify-content: center;
+}
+.align-center {
+	align-items: center;
+}
+.flex-wrap {
+	flex-wrap: wrap;
+}
+
+// Flex 对齐
+.justify-start {
+	justify-content: flex-start;
+}
+.justify-end {
+	justify-content: flex-end;
+}
+.justify-between {
+	justify-content: space-between;
+}
+.justify-around {
+	justify-content: space-around;
+}
+.justify-evenly {
+	justify-content: space-evenly;
+}
+
+.align-start {
+	align-items: flex-start;
+}
+.align-end {
+	align-items: flex-end;
+}
+.align-baseline {
+	align-items: baseline;
+}
+.align-stretch {
+	align-items: stretch;
+}
+
+.items-start {
+	align-content: flex-start;
+}
+.items-end {
+	align-content: flex-end;
+}
+.items-center {
+	align-content: center;
+}
+.items-between {
+	align-content: space-between;
+}
+.items-around {
+	align-content: space-around;
+}
+.items-evenly {
+	align-content: space-evenly;
+}
+
+// flex 填充
+.flex-fill {
+	flex: 1;
+}
+
+// 隐藏
+.d-hide {
+	display: none;
+}
+
+// 颜色
