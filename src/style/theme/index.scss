@@ -1,0 +1,23 @@
+// 主题样式
+
+// $primary-color: #42b983;
+// $secondary-color: #35495e;
+// $background-color: #ffffff;
+// $text-color: #333333;
+
+body {
+  background-color: $background-color;
+  color: $text-color;
+}
+
+.button-primary {
+  background-color: $primary-color;
+  border-color: $primary-color;
+  color: #ffffff;
+}
+
+.button-secondary {
+  background-color: $secondary-color;
+  border-color: $secondary-color;
+  color: #ffffff;
+}
