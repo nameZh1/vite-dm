@@ -1,7 +1,8 @@
 <script setup lang="ts" name="home">
 import { markRaw, reactive } from 'vue';
-import Map from '@/views/map/index.vue'
 import { Menu } from '@/models/home';
+import Map from '@/views/map/index.vue'
+import Login from '@/admin/login/index.vue'
 
 
 const info = reactive({
@@ -23,8 +24,8 @@ const menu = reactive<Menu>({
     },
     {
       id: '2',
-      name: 'test',
-      component: markRaw(Map)
+      name: 'login',
+      component: markRaw(Login)
     }
   ],
   pickHandle: (item) => {

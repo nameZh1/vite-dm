@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 import Home from "@/views/home/index.vue";
+import Login from "@/admin/login/index.vue"
 
 // 项目其他页面路由（推荐使用）
 
@@ -9,6 +10,11 @@ const routes: Array<RouteRecordRaw> = [
     path: "/",
     name: "Home",
     component: Home
+  },
+  {
+    path: "/login",
+    name: "login",
+    component: Login
   }
 ];
 
