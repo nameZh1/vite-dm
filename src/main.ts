@@ -15,5 +15,9 @@ import { registerGlobalComponents } from '@/components/index';
 registerGlobalComponents(app);
 import ElementPlus from 'element-plus'
 
+// 路由
+import router from "@/router/index";
+
 app.use(ElementPlus)
+app.use(router)
 app.mount('#app')

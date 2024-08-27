@@ -1,10 +1,9 @@
 <script setup lang="ts">
+// import Home from '@/views/home/index.vue'
 </script>
 
 <template>
-  <div>
-    <HelloWorld msg="hi" />
-  </div>
+  <router-view />
 </template>
 
 <style scoped>
