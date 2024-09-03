@@ -1,7 +1,3 @@
-<template>
-  <div ref="mapContainer" class="map-container"></div>
-</template>
-
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
 import * as maptalks from 'maptalks';
@@ -98,9 +94,14 @@ onMounted(() => {
 
     // 渲染 JSON 数据中的形状
     renderShapesFromJSON(buildingLayer, jsonData);
+
   }
 });
 </script>
+
+<template>
+  <div ref="mapContainer" class="map-container"></div>
+</template>
 
 <style scoped>
 .map-container {

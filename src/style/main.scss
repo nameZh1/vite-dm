@@ -2,7 +2,7 @@
 
 // @import './common/common.scss';
 // @use './theme/theme-light.scss' as *;
-// @use './theme/theme-dark.scss' as *;
+@use './theme/index.scss' as *;
 
 // 全局通用样式
 * {

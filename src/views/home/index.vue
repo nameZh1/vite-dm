@@ -1,7 +1,9 @@
 <script setup lang="ts" name="home">
-import { markRaw, reactive } from 'vue';
+import { markRaw, reactive, onMounted } from 'vue';
 import { Menu } from '@/models/home';
 import Map from '@/views/map/index.vue'
+import Log from '@/views/log/index.vue'
+import Test from '@/views/test/index.vue'
 import Login from '@/admin/login/index.vue'
 
 
@@ -26,11 +28,24 @@ const menu = reactive<Menu>({
       id: '2',
       name: 'login',
       component: markRaw(Login)
+    },
+    {
+      id: '3',
+      name: 'log',
+      component: markRaw(Log)
+    },
+    {
+      id: '4',
+      name: 'test',
+      component: markRaw(Test)
     }
   ],
   pickHandle: (item) => {
     menu.pickMenu = item
   }
+})
+onMounted(() => {
+  menu.pickMenu = menu.menuList[0]
 })
 </script>
 
@@ -39,7 +54,7 @@ const menu = reactive<Menu>({
     <el-header>{{ info.title }}</el-header>
     <el-container>
       <el-aside class='home-container-menu'>
-        <ol class='home-container-menu-item' v-for="menuItem in menu.menuList" :key="menuItem.id"  @click="menu.pickHandle(menuItem)">
+        <ol :class="{'home-container-menu-item pointer':true, 'home-container-menu-item-pick': menuItem === menu.pickMenu}" v-for="menuItem in menu.menuList" :key="menuItem.id"  @click="menu.pickHandle(menuItem)">
           {{ menuItem.name }}
         </ol>
       </el-aside>
@@ -56,10 +71,17 @@ const menu = reactive<Menu>({
   width: 200px;
   &-item {
     padding: 10px;
-    border-bottom: 1px solid #eee;
-    cursor: pointer;
+    border-bottom: 1px solid #fff;
+    // cursor: pointer;
     &:hover {
-      background-color: #f5f5f5;
+      background-color: #999;
+      border:1px solid #999;
+      border-bottom: 1px solid #999;
+    }
+    &-pick{
+      background-color: #999;
+      border:1px solid #999;
+      border-bottom: 1px solid #999;
     }
   }
 }

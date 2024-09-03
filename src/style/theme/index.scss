@@ -1,23 +1,30 @@
 // 主题样式
 
-// $primary-color: #42b983;
-// $secondary-color: #35495e;
-// $background-color: #ffffff;
-// $text-color: #333333;
+// --primary-color: #42b983;
+// --secondary-color: #35495e;
+// --background-color: #ffffff;
+// --text-color: #333333;
+
+// @use './theme/theme-light.scss' as *;
+// @use './theme/theme-dark.scss' as *;
 
 body {
-  background-color: $background-color;
-  color: $text-color;
+  --primary-color: #42b983;
+  --secondary-color: #35495e;
+  --background-color: #ffffff;
+  --text-color: #333333;
+  background-color: var(--background-color);
+  color: var(--text-color);
 }
 
 .button-primary {
-  background-color: $primary-color;
-  border-color: $primary-color;
-  color: #ffffff;
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+  color: var(--text-color);
 }
 
 .button-secondary {
-  background-color: $secondary-color;
-  border-color: $secondary-color;
-  color: #ffffff;
+  background-color: var(--secondary-color);
+  border-color: var(--secondary-color);
+  color: var(--text-color);
 }
