@@ -1,10 +1,13 @@
 <script setup lang="ts" name="test">
-import { onMounted, ref } from 'vue';
+import { onMounted } from 'vue';
+import { triggerFileUpload } from '@/hooks/useFileHandle'
+
 
 onMounted(() => { });
 </script>
 <template>
   <div class="test-container">
+    <el-button type="primary" @click="triggerFileUpload({ multiple: true })">测试</el-button>
     <div class="loading"></div>
   </div>
 
