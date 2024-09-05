@@ -210,3 +210,155 @@ export const triggerFileUpload = (param: TriggerFileUploadParams): void => {
     }
   }
 };
+
+
+export interface TriggerFileDownLoadParams {
+  url: string;
+  fileName?: string;
+}
+export const triggerFileDownload = (param: TriggerFileDownLoadParams): void => {
+  const { url, fileName='文件' } = param;
+
+  // 创建一个隐藏的 a 元素用于下载
+  const link = document.createElement('a');
+  link.style.display = 'none';
+  link.href = url;
+  link.download = fileName; // 指定下载文件的名字
+
+  // 将 link 添加到 DOM 并触发点击事件
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+
+  // 显示下载通知
+  // const notification = createNotification(fileName);
+  addStyles();
+  createNotification(fileName);
+
+  function createNotification(name: string): HTMLElement {
+    let container = document.querySelector('.zh1-notification-container') as HTMLElement;
+
+    // 如果容器不存在，则创建并添加到 body
+    if (!container) {
+      container = document.createElement('div');
+      container.classList.add('zh1-notification-container');
+      document.body.appendChild(container);
+    }
+
+    // 创建通知元素
+    const notification = document.createElement('div');
+    notification.classList.add('zh1-notification');
+    notification.innerHTML = `
+      <p><strong>文件名:</strong> ${name}</p>
+      <p><strong>状态:</strong> <span class="zh1-status">下载中...</span></p>
+      <div style="display: flex; flex-direction: row; position: relative">
+        <div style="position: relative; width: 20px; height: 20px">
+        <span class="zh1-notification-loading"></span>
+        </div>
+        <span class="zh1-status">
+          下载中...
+        </span>
+      </div>
+    `;
+
+    container.appendChild(notification);
+    
+    updateNotification(notification, '下载完成');
+    return notification;
+  }
+
+  function updateNotification(notification: HTMLElement, status: string): void {
+    const statusElement = notification.querySelector('.zh1-status') as HTMLElement;
+    const loadingElement = notification.querySelector('.zh1-notification-loading') as HTMLElement;
+
+    if (status === '下载完成') {
+      loadingElement.style.display = 'none';
+    }
+
+    if (statusElement) {
+      statusElement.innerText = status;
+    }
+
+    // 2 秒后自动移除通知
+    removeNotification(notification);
+  }
+
+  function removeNotification(notification: HTMLElement, delay: number = 2000, animationDuration: number = 500): void {
+    setTimeout(() => {
+      notification.style.transition = `all ${animationDuration}ms ease-in-out`;
+      notification.style.right = '-100%';
+      notification.style.opacity = '0';
+      setTimeout(() => {
+        notification.remove();
+      }, animationDuration);
+    }, delay);
+  }
+
+  function addStyles(): void {
+    if (!document.getElementById('download-styles')) {
+      const style = document.createElement('style');
+      style.id = 'download-styles';
+      style.textContent = `
+        .zh1-notification-container {
+          position: fixed;
+          top: 0;
+          right: 0;
+          z-index: 9999;
+          display: flex;
+          flex-direction: column;
+          align-items: flex-end;
+          padding: 10px;
+        }
+        .zh1-notification {
+          background: #f0f0f0;
+          padding: 10px;
+          margin-bottom: 10px;
+          border-radius: 4px;
+          box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+          position: relative;
+          right: 0;
+          top: 0;
+          animation: notification-spin .5s ease-in-out;
+        }
+        @keyframes notification-spin {
+          0% {
+            opacity: 0;
+            right: -100%;
+          }
+          100% {
+            opacity: 1;
+            right: 0;
+          }
+        }
+        .zh1-notification p {
+          margin: 5px 0;
+          font-size: 14px;
+        }
+        .zh1-notification strong {
+          font-weight: bold;
+        }
+
+.zh1-notification-loading::before {
+    position: absolute;
+    content: "";
+    min-width: 20px;
+    min-height: 20px;
+    border: 2px solid rgba(0, 0, 0, 0.1); 
+    border-top-color:var(--primary-color); 
+    border-radius: 50%;
+    animation: zh1-notification-loading-spin 1s linear infinite;
+  }
+
+@keyframes zh1-notification-loading-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+      `;
+      document.head.appendChild(style);
+    }
+  }
+};
