@@ -8,7 +8,7 @@ import Login from '@/admin/login/index.vue'
 
 
 const info = reactive({
-  title: 'tool',
+  title:  import.meta.env.VITE_APP_NAME,
   footer: ''
 })
 

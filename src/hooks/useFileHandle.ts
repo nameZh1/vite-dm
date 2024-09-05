@@ -2,16 +2,18 @@ import { UPLOAD } from '@/utils/apiClient'
 import { AxiosProgressEvent } from 'axios';
 
 export interface TriggerFileUploadParams {
-  multiple: boolean;
+  multiple?: boolean;
+  fileSize?: number;
+  fileAccept?: string;
 }
 
 export const triggerFileUpload = (param: TriggerFileUploadParams): void => {
-  const { multiple } = param;
+  const { multiple = false, fileSize = 2, fileAccept = '' } = param;
 
   // 创建一个隐藏的 input 元素
   const input: HTMLInputElement = document.createElement('input');
   input.type = 'file';
-  input.accept = '.jpg';
+  input.accept = fileAccept;
   input.style.display = 'none';
   input.multiple = multiple;
 
@@ -32,7 +34,7 @@ export const triggerFileUpload = (param: TriggerFileUploadParams): void => {
 
     if (files && files.length > 0) {
       for (const file of files) {
-        if (file.size > 2 * 1024 * 1024) {
+        if (file.size > fileSize * 1024 * 1024) {
           alert(`文件 "${file.name}" 大小不能超过2MB`);
           continue;
         }
@@ -45,9 +47,11 @@ export const triggerFileUpload = (param: TriggerFileUploadParams): void => {
 
         try {
           const response = await UPLOAD({
-            url: 'https://jsonplaceholder.typicode.com/posts/',
+            // url: 'https://jsonplaceholder.typicode.com/posts/',
+            url: '/api/upload',
             data: formData,
             onUploadProgress: (event: AxiosProgressEvent) => { // 使用 AxiosProgressEvent 类型
+              console.log(event, 'onUploadProgress')
               if (event.total) {
                 const percentComplete = Math.round((event.loaded / event.total) * 100);
                 updateNotification(notification, percentComplete, '上传中...');
@@ -58,10 +62,10 @@ export const triggerFileUpload = (param: TriggerFileUploadParams): void => {
           if (response.status === 200) {
             updateNotification(notification, 100, '上传完成');
           } else {
-            updateNotification(notification, 100, '上传失败');
+            updateNotification(notification, 0, '上传失败');
           }
         } catch (error) {
-          updateNotification(notification, 100, '上传失败');
+          updateNotification(notification, 0, '上传失败');
         } finally {
           removeNotification(notification);
         }
@@ -87,7 +91,14 @@ export const triggerFileUpload = (param: TriggerFileUploadParams): void => {
       <p><strong>文件名:</strong> ${name}</p>
       <p><strong>大小:</strong> ${(size / 1024).toFixed(2)} KB</p>
       <p><strong>进度:</strong> <span class="zh1-progress">0%</span></p>
-      <p><strong>状态:</strong> <span class="zh1-status">上传中...</span></p>
+      <div style="display: flex; flex-direction: row; position: relative">
+        <div style="position: relative; width: 20px; height: 20px">
+        <span class="zh1-notification-loading"></span>
+        </div>
+        <span class="zh1-status">
+          上传中...
+        </span>
+      </div>
     `;
 
     // 将通知插入到容器中
@@ -98,6 +109,13 @@ export const triggerFileUpload = (param: TriggerFileUploadParams): void => {
   function updateNotification(notification: HTMLElement, progress: number, status: string): void {
     const progressElement = notification.querySelector('.zh1-progress') as HTMLElement;
     const statusElement = notification.querySelector('.zh1-status') as HTMLElement;
+    const loadingElement = notification.querySelector('.zh1-notification-loading') as HTMLElement;
+
+    if(status === '上传成功' || status === '上传失败') {
+      loadingElement.style.display = 'none';
+
+    } 
+
 
     if (progressElement) {
       progressElement.innerText = `${progress}%`;
@@ -108,43 +126,87 @@ export const triggerFileUpload = (param: TriggerFileUploadParams): void => {
     }
   }
 
-  function removeNotification(notification: HTMLElement): void {
+  function removeNotification(notification: HTMLElement, delay: number = 2000, animationDuration: number = 500): void {
+    // 等待一定时间后移除通知
     setTimeout(() => {
-      notification.remove();
-    }, 1000);
+      notification.style.transition = `all ${animationDuration}ms ease-in-out`; // 动态设置过渡时间
+      notification.style.right = '-100%'; // 启动动画
+      notification.style.opacity = '0'; // 启动动画
+      // 在动画结束后移除元素
+      setTimeout(() => {
+        notification.remove();
+      }, animationDuration);
+    }, delay);
   }
 
+
   function addStyles(): void {
-    const style = document.createElement('style');
-    style.textContent = `
-      .zh1-notification-container {
-        position: fixed;
-        top: 0;
-        right: 0;
-        z-index: 9999;
-        display: flex;
-        flex-direction: column;
-        align-items: flex-end;
-        padding: 10px;
-      }
-      .zh1-notification {
-        background: #f0f0f0;
-        padding: 10px;
-        margin-bottom: 10px;
-        border-radius: 4px;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        position: relative;
-        right: 0;
-        top: 0;
-      }
-      .zh1-notification p {
-        margin: 5px 0;
-        font-size: 14px;
-      }
-      .zh1-notification strong {
-        font-weight: bold;
-      }
-    `;
-    document.head.appendChild(style);
+    if (!document.getElementById('upload-styles')) {
+      const style = document.createElement('style');
+      style.id = 'upload-styles'; // 设置一个唯一的 ID，防止重复
+      style.textContent = `
+        .zh1-notification-container {
+          position: fixed;
+          top: 0;
+          right: 0;
+          z-index: 9999;
+          display: flex;
+          flex-direction: column;
+          align-items: flex-end;
+          padding: 10px;
+        }
+        .zh1-notification {
+          background: #f0f0f0;
+          padding: 10px;
+          margin-bottom: 10px;
+          border-radius: 4px;
+          box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+          position: relative;
+          right: 0;
+          top: 0;
+          animation: notification-spin .5s ease-in-out;
+        }
+        
+          @keyframes notification-spin {
+            0% {
+              opacity: 0;
+              right: -100%;
+              }
+            100% {
+              opacity: 1;
+              right: 0;
+              }
+          }
+        .zh1-notification p {
+          margin: 5px 0;
+          font-size: 14px;
+        }
+        .zh1-notification strong {
+          font-weight: bold;
+        }
+
+.zh1-notification-loading::before {
+    position: absolute;
+    content: "";
+    min-width: 20px;
+    min-height: 20px;
+    border: 2px solid rgba(0, 0, 0, 0.1); /* 外圈淡色 */
+    border-top-color:var(--primary-color); /* 旋转的部分颜色 */
+    border-radius: 50%;
+    animation: zh1-notification-loading-spin 1s linear infinite; /* 旋转动画 */
+  }
+
+/* 旋转动画定义 */
+@keyframes zh1-notification-loading-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+      `;
+      document.head.appendChild(style);
+    }
   }
 };

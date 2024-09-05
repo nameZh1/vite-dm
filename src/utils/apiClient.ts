@@ -1,7 +1,7 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 const api = axios.create({
-  baseURL: 'https://your-api-url.com/api',
+  baseURL: import.meta.env.VITE_API_BASE_URL,
   timeout: 10000,
   headers: {
     'Content-Type': 'application/json',
@@ -10,6 +10,7 @@ const api = axios.create({
 
 api.interceptors.request.use(
   (config) => {
+    // config.url = import.meta.env.VITE_PROXY_KEY + config.url;
     return config;
   },
   (error) => {
@@ -20,7 +21,7 @@ api.interceptors.request.use(
 api.interceptors.response.use(
   (response) => {
     return response;
-  },
+  }, 
   (error) => {
     return Promise.reject(error);
   }

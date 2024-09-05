@@ -7,7 +7,7 @@ onMounted(() => { });
 </script>
 <template>
   <div class="test-container">
-    <el-button type="primary" @click="triggerFileUpload({ multiple: true })">测试</el-button>
+    <el-button type="primary" @click="triggerFileUpload({ multiple: true, fileSize: 2 })">测试</el-button>
     <div class="loading"></div>
   </div>
 
