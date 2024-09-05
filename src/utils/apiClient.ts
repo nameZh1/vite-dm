@@ -1,4 +1,4 @@
-import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
+import axios, { AxiosProgressEvent, AxiosRequestConfig, AxiosResponse } from 'axios';
 
 const api = axios.create({
   baseURL: import.meta.env.VITE_API_BASE_URL,
@@ -32,6 +32,7 @@ interface RequestConfig extends AxiosRequestConfig {
   data?: any;
   file?: File;
   files?: File[];
+  fileName?: string;
 }
 
 export const GET = async <T = any>({ url, ...config }: RequestConfig): Promise<AxiosResponse<T>> => {
@@ -50,6 +51,13 @@ export const DEL = async <T = any>({ url, ...config }: RequestConfig): Promise<A
   return api.delete(url, config);
 };
 
+const handleProgress = (e: AxiosProgressEvent) => {
+  if (e.total) {
+    const progress = Math.round((e.loaded * 100) / e.total);
+    console.log(`Progress: ${progress}%`);
+  }
+};
+
 export const UPLOAD = async <T = any>({ url, file, ...config }: RequestConfig): Promise<AxiosResponse<T>> => {
   const formData = new FormData();
   if (file) {
@@ -61,36 +69,36 @@ export const UPLOAD = async <T = any>({ url, file, ...config }: RequestConfig): 
     headers: {
       'Content-Type': 'multipart/form-data',
     },
-    onUploadProgress: (e) => {
-      if (e.total) {
-        const progress = Math.round((e.loaded * 100) / e.total);
-        console.log(`Upload progress: ${progress}%`);
-      }
-    },
+    onUploadProgress: handleProgress,
   });
 };
 
-export const UPLOADMULTIPLE = async <T = any>({ url, files, ...config }: RequestConfig): Promise<AxiosResponse<T>> => {
-  const formData = new FormData();
-  if (files && files.length > 0) {
-    files.forEach((file, i) => {
-      formData.append(`file${i}`, file);
+export const DOWNLOAD = async ({ url, fileName = '下载文件', ...config }: RequestConfig): Promise<void> => {
+  try {
+    const response = await api.get(url, {
+      ...config,
+      responseType: 'blob', // Set response type to 'blob'
+      onDownloadProgress: handleProgress, // Handle download progress
     });
-  }
 
-  return api.post(url, formData, {
-    ...config,
-    headers: {
-      'Content-Type': 'multipart/form-data',
-    },
-    onUploadProgress: (e) => {
-      if (e.total) {
-        const progress = Math.round((e.loaded * 100) / e.total);
-        console.log(`Upload progress: ${progress}%`);
-      }
-    },
-  });
+    // 创建一个 URL 对象来生成下载链接
+    const urlObject = window.URL.createObjectURL(new Blob([response.data]));
+    const link = document.createElement('a');
+    link.href = urlObject;
+    link.download = fileName;
+    link.click();
+
+    // 释放对象 URL
+    window.URL.revokeObjectURL(urlObject);
+
+    // 处理下载成功
+    console.log('下载成功');
+  } catch (error) {
+    // 处理下载失败
+    console.error('下载失败', error);
+  }
 };
+
 
 
 // // GET 请求
