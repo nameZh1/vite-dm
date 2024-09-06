@@ -20,7 +20,7 @@ interface FetchParams {
 }
 
 interface UseTabOptions {
-  apiUrl: string;
+  apiUrl?: string;
   defaultPageSize?: number;
 }
 
@@ -36,14 +36,20 @@ export function useTab(options: UseTabOptions) {
   const fetchTableData = async (params: FetchParams) => {
     loading.value = true;
     try {
-      const response: AxiosResponse<{ data: TableData[]; total: number }> = await axios.get(options.apiUrl, {
-        params: {
-          page: params.page,
-          size: params.size,
-        },
-      });
-      tableData.value = response.data.data;
-      pagination.total = response.data.total;
+      if(options.apiUrl) {
+        const response: AxiosResponse<{ data: TableData[]; total: number }> = await axios.get(options.apiUrl, {
+          params: {
+            page: params.page,
+            size: params.size,
+          },
+        });
+        tableData.value = response.data.data || [];
+        pagination.total = response.data.total || 0;
+      } else {
+        // tableData.value = [{id: 1, name: 'John Doe'}];
+        tableData.value = [];
+        pagination.total = Number(tableData.value.length);
+      }
     } catch (error) {
       console.error('Error fetching table data:', error);
     } finally {

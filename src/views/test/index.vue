@@ -1,17 +1,20 @@
 <script setup lang="ts" name="test">
+import { useDebounce } from '@/hooks/useTools';
+import { ElMessage } from 'element-plus';
 import { onMounted } from 'vue';
-import { triggerFileDownload, triggerFileUpload } from '@/hooks/useFileHandle'
-import Zh1Table from '@/components/zh1-table.vue';
 
+const test = () => {
+  useDebounce(() => {
+    ElMessage.success('111')
+    console.log('1')
+  }, 20)
+}
 
 onMounted(() => { });
 </script>
 <template>
   <div class="test-container">
-    <!-- <el-button type="primary" @click="triggerFileUpload({ multiple: true, fileSize: 2 })">上传测试</el-button>
-    <el-button type="primary" @click="triggerFileDownload({ url: '', fileName: 'test' })">下载测试</el-button> -->
-    <Zh1Table />
-    <!-- <div class="loading"></div> -->
+    <el-button @click="test">111</el-button>
   </div>
 </template>
 
