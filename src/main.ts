@@ -14,10 +14,13 @@ import { registerGlobalComponents } from '@/components/index';
 // 动态注册全局组件
 registerGlobalComponents(app);
 import ElementPlus from 'element-plus'
+import zhCn from 'element-plus/es/locale/lang/zh-cn'
 
 // 路由
 import router from "@/router/index";
 
-app.use(ElementPlus)
+app.use(ElementPlus, {
+  locale: zhCn
+})
 app.use(router)
 app.mount('#app')

@@ -1,6 +1,11 @@
 import { UPLOAD } from '@/utils/apiClient'
 import { AxiosProgressEvent } from 'axios';
 
+/**
+ * multiple 多选上传
+ * fileSize 文件大小限制
+ * fileAccept 文件格式限制（后缀名）
+ */
 export interface TriggerFileUploadParams {
   multiple?: boolean;
   fileSize?: number;
@@ -212,6 +217,10 @@ export const triggerFileUpload = (param: TriggerFileUploadParams): void => {
 };
 
 
+/**
+ * URL:下载链接
+ * fileName:文件名
+ */
 export interface TriggerFileDownLoadParams {
   url: string;
   fileName?: string;
