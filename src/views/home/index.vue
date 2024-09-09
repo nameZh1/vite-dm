@@ -8,7 +8,7 @@ import Login from '@/admin/login/index.vue'
 
 
 const info = reactive({
-  title:  import.meta.env.VITE_APP_NAME,
+  title: import.meta.env.VITE_APP_NAME,
   footer: ''
 })
 
@@ -51,38 +51,66 @@ onMounted(() => {
 
 <template>
   <el-container class="w100v h100v">
-    <el-header>{{ info.title }}</el-header>
+    <el-header class="d-flex flex-row justify-center align-center text-bold font20">{{ info.title }}</el-header>
     <el-container>
       <el-aside class='home-container-menu'>
-        <ol :class="{'home-container-menu-item pointer':true, 'home-container-menu-item-pick': menuItem === menu.pickMenu}" v-for="menuItem in menu.menuList" :key="menuItem.id"  @click="menu.pickHandle(menuItem)">
+        <ol
+          :class="{ 'home-container-menu-item pointer transition-all text-bold': true, 'home-container-menu-item-pick': menuItem === menu.pickMenu }"
+          v-for="menuItem in menu.menuList" :key="menuItem.id" @click="menu.pickHandle(menuItem)">
           {{ menuItem.name }}
         </ol>
       </el-aside>
-      <el-main>
-        <component :is="menu.pickMenu.component" />
+      <el-main class="home-container-main">
+        <transition name="fade" mode="out-in">
+          <component :is="menu.pickMenu.component" />
+        </transition>
       </el-main>
     </el-container>
-    <el-footer>footer</el-footer>
+    <el-footer class="d-flex flex-row justify-center align-center">footer</el-footer>
   </el-container>
 </template>
 
 <style scoped lang="scss">
-.home-container-menu {
-  width: 200px;
-  &-item {
-    padding: 10px;
-    border-bottom: 1px solid #fff;
-    // cursor: pointer;
-    &:hover {
-      background-color: #999;
-      border:1px solid #999;
-      border-bottom: 1px solid #999;
-    }
-    &-pick{
-      background-color: #999;
-      border:1px solid #999;
-      border-bottom: 1px solid #999;
+.home-container {
+  background-color: var(--el-bg-color-page);
+  color: var(--el-text-color-primary);
+
+  &-menu {
+    width: 200px;
+    margin-left: 20px;
+    border-radius: 8px;
+    background-color: var(--el-bg-color);
+
+    &-item {
+      padding: 10px;
+
+      &:hover {
+        background-color: var(--el-color-primary);
+        color: var(--el-text-color-primary);
+      }
+
+      &-pick {
+        background-color: var(--el-color-primary);
+        color: var(--el-text-color-primary);
+      }
     }
   }
+
+  &-main {
+    border-radius: 8px;
+    margin: 0 20px;
+    padding: 0;
+    background-color: var(--el-bg-color);
+  }
+
+}
+
+/* 定义过渡动画效果 */
+.fade-enter-active, .fade-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.fade-enter-from, .fade-leave-to {
+  opacity: 0;
 }
 </style>

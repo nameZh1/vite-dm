@@ -8,17 +8,18 @@ import { ref, onUnmounted, getCurrentInstance } from 'vue';
  * @returns 
  */
 export function useDebounce<T>(fn: (args: T) => void, delay: number) {
-  debugger
   const timer = ref<ReturnType<typeof setTimeout> | null>(null);
 
   const debouncedFn = (args: T) => {
+    console.log(timer.value)
     if (timer.value) {
       clearTimeout(timer.value);
     }
-
     timer.value = setTimeout(() => {
       fn(args);
     }, delay);
+    console.log(timer.value)
+
   };
 
   // 检查当前是否在组件的 setup() 函数中

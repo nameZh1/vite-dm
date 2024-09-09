@@ -4,10 +4,10 @@ import { ElMessage } from 'element-plus';
 import { onMounted } from 'vue';
 
 const test = () => {
-  useDebounce(() => {
-    ElMessage.success('111')
+  useDebounce((par: 'wzh') => {
+    ElMessage.success('111' + par)
     console.log('1')
-  }, 20)
+  }, 1000)('wzh')
 }
 
 onMounted(() => { });
