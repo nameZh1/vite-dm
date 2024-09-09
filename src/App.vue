@@ -1,21 +1,40 @@
 <script setup lang="ts">
+import { ref } from 'vue';
+
+const currentTheme = ref('theme-light');
+
+const toggleTheme = () => {
+  currentTheme.value = currentTheme.value === 'theme-dark' ? 'theme-light' : 'theme-dark';
+};
 </script>
 
 <template>
-  <router-view />
+  <el-button class="change_btn" @click="toggleTheme">Change Theme</el-button>
+  <router-view :class="[currentTheme, 'allStyle_control']" />
 </template>
 
-<style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+<style lang="scss">
+@use './style/theme/theme-dark.scss' as dark;
+@use './style/theme/theme-light.scss' as light;
+
+.change_btn {
+  position: fixed;
+  right: 0;
+  margin: 10px;
+  top: 0;
 }
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+
+.allStyle_control {
+  background-color: var(--el-bg-color-page);
+  color: var(--el-text-color-primary);
+  transition: all .5s;
 }
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
+
+.theme-dark {
+  @include dark.theme;
+}
+
+.theme-light {
+  @include light.theme;
 }
 </style>

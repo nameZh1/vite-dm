@@ -1,5 +1,71 @@
-$primary-color: #42b983;
-$secondary-color: #35495e;
-$background-color: #ffffff;
-$text-color: #333333;
-@use './index.scss' as *;
+/**
+* light 主题
+* --el-color-primary: 这是 Element Plus 的主色，可以根据需求覆盖。例如，--el-color-primary 是主按钮和高亮组件的颜色。
+* 文本和背景颜色: 通过 --el-text-color-primary、--el-bg-color-page 等变量，可以控制文本、背景的颜色。
+* 按钮样式: 覆盖 Element Plus 的按钮背景、边框颜色。
+* 输入框、表单: 覆盖输入框和表单相关的样式，如背景色、边框色等。
+* 分页和表格样式: 通过 --el-pagination-background-color 和 --el-table-bg-color 控制分页、表格等组件的样式。
+-------------------------**/
+@mixin theme {
+  // element plus
+  --primary-color: #409eff;
+  --secondary-color: #cccccc;
+  --background-color: #f0f0f0;
+  --text-color: #333333;
+  // element plus
+  // 基本颜色
+  // --el-color-primary: #409eff; // 明亮的蓝色作为主色调
+  // --el-color-primary-light-1: lighten(#409eff, 10%);
+  // --el-color-primary-light-2: lighten(#409eff, 20%);
+  // --el-color-primary-light-3: lighten(#409eff, 30%);
+  // --el-color-primary-light-4: lighten(#409eff, 40%);
+  // --el-color-primary-light-5: lighten(#409eff, 50%);
+  // --el-color-primary-light-6: lighten(#409eff, 60%);
+  // --el-color-primary-light-7: lighten(#409eff, 70%);
+  // --el-color-primary-light-8: lighten(#409eff, 80%);
+  // --el-color-primary-light-9: lighten(#409eff, 90%);
+
+  // // 文本颜色
+  // --el-text-color-primary: #333333; // 主文本颜色，深灰色
+  // --el-text-color-regular: #666666; // 常规文本颜色
+  // --el-text-color-secondary: #999999; // 次文本颜色
+  // --el-text-color-placeholder: #cccccc; // 占位文本颜色
+
+  // // 背景颜色
+  // --el-bg-color-page: #ffffff; // 页面背景颜色，白色
+  // --el-bg-color: #f5f5f5; // 元素背景颜色
+  // --el-bg-color-overlay: rgba(255, 255, 255, 0.9); // 浮层背景色，白色透明
+
+  // // 边框颜色
+  // --el-border-color-base: #e0e0e0;
+  // --el-border-color-light: #e5e5e5;
+  // --el-border-color-lighter: #ededed;
+  // --el-border-color-extra-light: #f7f7f7;
+
+  // 按钮
+  // --el-button-primary-background-color: var(--el-color-primary);
+  // --el-button-primary-border-color: var(--el-color-primary);
+  // --el-button-primary-hover-background-color: var(--el-color-primary-light-1);
+  // --el-button-primary-hover-border-color: var(--el-color-primary-light-1);
+  // --el-button-primary-active-background-color: var(--el-color-primary-light-1);
+  // --el-button-primary-active-border-color: var(--el-color-primary-light-1);
+
+  // // 输入框
+  // --el-input-bg-color: var(--el-bg-color);
+  // --el-input-border-color: var(--el-border-color-base);
+  // --el-input-placeholder-color: var(--el-text-color-placeholder);
+  // --el-input-text-color: var(--el-text-color-primary);
+
+  // // 表单项
+  // --el-form-item-label-text-color: var(--el-text-color-regular);
+
+  // // 表格
+  // --el-table-bg-color: var(--el-bg-color);
+  // --el-table-border-color: var(--el-border-color-base);
+  // --el-table-row-hover-bg-color: lighten(var(--el-bg-color), 10%);
+
+  // // 分页
+  // --el-pagination-background-color: var(--el-bg-color);
+  // --el-pagination-hover-background-color: var(--el-bg-color);
+  // --el-pagination-border-color: var(--el-border-color-base);
+}
