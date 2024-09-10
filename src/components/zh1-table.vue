@@ -3,9 +3,10 @@ import { useTab } from '@/hooks/useTab';
 import { computed, onMounted } from 'vue';
 import EmptyPage from '@/components/EmptyPage.vue';
 
-const { tableData, pagination, loading, handlePageChange, handlePageSizeChange } = useTab({
+const { tableData, pagination, loading, handlePageChange, handlePageSizeChange, searchQuery, fetchTableData } = useTab({
   apiUrl: '/xxx', // 假设你有一个API
   defaultPageSize: 10,
+  autoApi: false
 });
 
 // 是否有数据
@@ -14,7 +15,13 @@ const hasData = computed(() => {
 })
 
 
-onMounted(() => {})
+onMounted(() => {
+  searchQuery.value = {
+    a: 1
+  }
+  fetchTableData()
+
+})
 
 </script>
 

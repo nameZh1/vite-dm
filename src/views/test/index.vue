@@ -1,4 +1,5 @@
 <script setup lang="ts" name="test">
+import Zh1Table from '@/components/zh1-table.vue';
 import { useThrottle } from '@/hooks/useTools';
 import { ElMessage } from 'element-plus';
 import { onMounted } from 'vue';
@@ -18,7 +19,7 @@ onMounted(() => { });
 </script>
 <template>
   <div class="test-container">
-    <el-button @click="test">111</el-button>
+    <Zh1Table></Zh1Table>
   </div>
 </template>
 

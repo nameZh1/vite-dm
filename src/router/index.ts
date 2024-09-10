@@ -1,6 +1,8 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 import Home from "@/views/home/index.vue";
 import Login from "@/admin/login/index.vue"
+import Page404 from "@/components/Page404.vue";
+
 
 // 项目其他页面路由（推荐使用）
 
@@ -15,7 +17,12 @@ const routes: Array<RouteRecordRaw> = [
     path: "/login",
     name: "login",
     component: Login
-  }
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    name: 'Page404',
+    component: Page404,
+  },
 ];
 
 const router = createRouter({
