@@ -2,110 +2,67 @@
 import { onMounted, ref } from 'vue';
 import * as maptalks from 'maptalks';
 import { renderShapesFromJSON } from '@/utils/maptalks';
-import img from './1.png'
+import { optJson } from './opt';
 
+// 加载变量
+const loading = ref(false);
+
+// 图层变量
 const mapContainer = ref<HTMLElement | null>(null);
+const Map = ref<maptalks.Map>();
 
-onMounted(() => {
+const layersMap = ref({} as Record<string, maptalks.VectorLayer>);
+const currentLayer = ref('');
+
+
+onMounted(async () => {
+  loading.value = true
   if (mapContainer.value) {
-    const map = new maptalks.Map(mapContainer.value, {
+    Map.value = new maptalks.Map(mapContainer.value, {
       center: [0, 0],
       zoom: 14,
       baseLayer: new maptalks.TileLayer('base', {
         urlTemplate: 'http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png',
         subdomains: ['a', 'b', 'c', 'd'],
+        attribution: 'wzh'
       })
     });
-
-    // 添加建筑平面图层并传入空数组作为 geometries 参数
-    const buildingLayer = new maptalks.VectorLayer('building', []).addTo(map);
-
     // JSON 数据
-    const jsonData = {
-      "shapes": [
-        {
-          "type": "polygon",
-          "coordinates": [
-            [0, 0],
-            [0.01, 0],
-            [0.01, 0.01],
-            [0, 0.01]
-          ],
-          "options": {
-            "lineColor": "#34495e",
-            "lineWidth": 3,
-            "polygonFill": "#1abc9c",
-            "polygonOpacity": 0.6
-          }
-        },
-        {
-          "type": "line",
-          "coordinates": [
-            [0.01, 0.01],
-            [0.02, 0.01],
-            [0.02, 0.02]
-          ],
-          "options": {
-            "lineColor": "#e74c3c",
-            "lineWidth": 3
-          }
-        },
-        {
-          "type": "point",
-          "coordinate": [0.01, 0.02],
-          "options": {
-            "textFaceName": "monospace",
-            "textName": "Hello",
-            "markerFill": "#1abc9c",
-            "markerLineColor": "#34495e",
-            "markerLineWidth": 2,
-            "markerWidth": 10,
-            "markerHeight": 10,
-          }
-        },
-        {
-          "type": "point",
-          "coordinate": [0, 0.02],
-          "options": {
-            'markerFile': img,
-            'markerWidth': 28,
-            'markerHeight': 28,
-            'markerDx': 0,
-            'markerDy': 0,
-            'markerOpacity': 1
-          }
-        },
-        {
-          "type": "point",
-          "coordinate": [0.01, 0.01],
-          "options": {
-            // markerFileName: 'icon-url', // 或使用 markerFill 等属性
-            markerFill: '#1abc9c',
-            markerLineColor: '#34495e',
-            markerLineWidth: 2,
-            markerWidth: 10,
-            markerHeight: 10,
-            textName: 'Hello',
-            textFaceName: 'monospace'
-          }
-        }
-      ]
-    };
-
+    const jsonData = optJson;
     // 渲染 JSON 数据中的形状
-    renderShapesFromJSON(buildingLayer, jsonData);
-
+    layersMap.value = renderShapesFromJSON(jsonData, Map.value as maptalks.Map);
+  
+    loading.value = false
   }
 });
+
+// 切换图层
+const changeLayer = (key:any, value: any) => {
+  if(currentLayer.value && currentLayer.value!== key) {
+    layersMap.value[currentLayer.value].hide();
+  }
+  if (layersMap.value[key]) {
+    layersMap.value[key].show();
+  }
+  currentLayer.value = key;
+};
+
 </script>
 
 <template>
-  <div ref="mapContainer" class="map-container"></div>
+  <div v-loading="loading" class="w100 h100 position-relative">
+    <div ref="mapContainer" class="w100 h100"></div>
+    <div class="map-container-changeLayer">
+      <el-button v-for="(value, key) in layersMap" @click="changeLayer(key, value)">{{ key }}</el-button>
+    </div>
+  </div>
 </template>
 
-<style scoped>
-.map-container {
-  width: 100%;
-  height: 100%;
+<style scoped lang="scss">
+.map-container-changeLayer {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 1000;
 }
 </style>

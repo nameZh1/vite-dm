@@ -335,3 +335,16 @@
 .transition-all {
   transition: all 0.5s;
 }
+
+
+/* position
+*********************** */
+.position-relative {
+  position: relative;
+}
+.position-absolute {
+  position: absolute;
+}
+.position-fixed {
+  position: fixed;
+}
