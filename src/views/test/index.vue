@@ -1,14 +1,18 @@
 <script setup lang="ts" name="test">
-import { useDebounce } from '@/hooks/useTools';
+import { useThrottle } from '@/hooks/useTools';
 import { ElMessage } from 'element-plus';
 import { onMounted } from 'vue';
 
+// 创建防抖函数
+const debouncedFn = useThrottle((par: string) => {
+  ElMessage.success('111 ' + par);
+  console.log('防抖函数触发:', par);
+}, 1000);
+
+// 点击按钮时调用该函数
 const test = () => {
-  useDebounce((par: 'wzh') => {
-    ElMessage.success('111' + par)
-    console.log('1')
-  }, 1000)('wzh')
-}
+  debouncedFn('222'); // 调用防抖函数
+};
 
 onMounted(() => { });
 </script>
