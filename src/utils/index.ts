@@ -41,6 +41,13 @@ export function reSetObj(obj: any) {
 
 }
 
+
+/**
+ * 时间格式化
+ * @param date 时间对象
+ * @param format 格式
+ * @returns 
+ */
 export const formatDate = (date: Date, format: string = 'YYYY-MM-DD'): string => {
   const year = date.getFullYear();
   const month = String(date.getMonth() + 1).padStart(2, '0');
