@@ -12,7 +12,7 @@ export interface TriggerFileUploadParams {
   fileAccept?: string;
 }
 
-export const triggerFileUpload = (param: TriggerFileUploadParams): void => {
+export const triggerFileUpload = (param: TriggerFileUploadParams = {}): void => {
   const { multiple = false, fileSize = 2, fileAccept = '' } = param;
 
   // 创建一个隐藏的 input 元素
