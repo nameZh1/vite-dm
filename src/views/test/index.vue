@@ -2,7 +2,7 @@
 import { ElMessage } from 'element-plus';
 import { onMounted, ref, computed } from 'vue';
 import { fileUpload } from '../../utils/fileUpload';
-import { formatDate } from '../../utils/formatDate';
+import { formatDate, reSetObj } from '../../utils/index';
 
 
 
@@ -55,7 +55,7 @@ const fileToRow = async (formtDate: any, rows: any) => {
   for (let i = 0; i < rows.length; i++) {
     if (formtDate.get('file').name.includes(rows[i].key)) {
       ElMessage.success(rows[i].key)
-      
+
       // tableData.value[rows[i].index].data.push({
       //   name: formtDate.get('file').name,
       //   data: formtDate.get('file')
@@ -97,7 +97,24 @@ const test = () => {
   dialogTableVisible.value = true;
 };
 
-onMounted(() => { });
+onMounted(() => {
+  let obj = {
+    a: '1'
+  }
+  let arr = [
+    {
+      a: '1'
+    }
+  ]
+  let str = 'a'
+  let num = 1
+  console.log(obj, arr, str, num,)
+  obj = reSetObj(obj)
+  arr = reSetObj(arr)
+  str = reSetObj(str)
+  num = reSetObj(num)
+  console.log(obj, arr, str, num,)
+});
 </script>
 <template>
   <div class="test-container">
@@ -114,7 +131,7 @@ onMounted(() => { });
         <el-table-column prop="data" label="数据">
           <template #default="{ row }">
             <template v-for="(item, index) in row.data">
-              <a>{{item.name}}</a>
+              <a>{{ item.name }}</a>
             </template>
           </template>
         </el-table-column>
