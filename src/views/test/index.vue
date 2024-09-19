@@ -74,8 +74,7 @@ const fileToRow = async (formtDate: any, rows: any) => {
 
 // 删除
 const handleDelet = (row: any) => {
-  console.log(tableData.value[row.index].data)
-  // tableData.value[row.index].data = []
+  tableData.value[row.index].data = []
 }
 
 
@@ -114,8 +113,9 @@ onMounted(() => {
         <el-table-column prop="data" label="数据">
           <template #default="{ row }">
             <template v-for="(item, index) in row.data">
-              <!-- <a>{{ item.name }}</a> -->
-              <el-image style="width: 100px; height: 100px" :src="item.data" fit="fill" />
+              <div class="card-shadow">{{ item.name }}</div>
+              <!-- <el-card shadow="always">{{ item.name }}</el-card> -->
+              <!-- <el-image style="width: 100px; height: 100px" :src="item.data" fit="fill" /> -->
             </template>
           </template>
         </el-table-column>

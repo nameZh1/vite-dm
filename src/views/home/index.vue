@@ -51,7 +51,10 @@ onMounted(() => {
 
 <template>
   <el-container class="w100v h100v">
-    <el-header class="d-flex flex-row justify-center align-center text-bold font20">{{ info.title }}</el-header>
+    <el-header class="d-flex flex-row justify-center align-center text-bold font20">
+      <el-image class="w40 h40 mr10" src="/src/assets/img/567.JPG" fit="contain" />
+      <div>{{ info.title }}</div>
+    </el-header>
     <el-container>
       <el-aside class='home-container-menu'>
         <ol
