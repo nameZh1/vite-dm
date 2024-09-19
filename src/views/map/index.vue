@@ -50,8 +50,8 @@ const changeLayer = (key:any, value: any) => {
 </script>
 
 <template>
-  <div v-loading="loading" class="w100 h100 position-relative">
-    <div ref="mapContainer" class="w100 h100"></div>
+  <div v-loading="loading" class="w100p h100p position-relative">
+    <div ref="mapContainer" class="w100p h100p"></div>
     <div class="map-container-changeLayer">
       <el-button v-for="(value, key) in layersMap" @click="changeLayer(key, value)">{{ key }}</el-button>
     </div>
