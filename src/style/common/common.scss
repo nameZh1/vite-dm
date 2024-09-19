@@ -64,11 +64,14 @@
 .h50p {
   height: 50%;
 }
-.w10 {
-  width: 10px;
-}
-.h10 {
-  height: 10px;
+
+@for $i from 1 through 35 {
+  .w#{$i} {
+    width: #{$i}px !important;
+  }
+  .h#{$i} {
+    height: #{$i}px !important;
+  }
 }
 
 /* Display 类名
