@@ -2,8 +2,6 @@
 import { ElMessage } from 'element-plus';
 import { onMounted, ref, computed } from 'vue';
 import { fileUpload } from '../../utils/fileUpload';
-import { formatDate } from '../../utils/formatDate';
-
 
 
 // 弹框展示标识
@@ -44,8 +42,8 @@ const tableData = ref([
 const handleUpload = async (rows: any, multiple: boolean = false) => {
   // console.log(rows)
   // return 
-  const formDatas = await fileUpload({ multiple: multiple })
-  formDatas.forEach((formDataItem) => {
+  const formDatas = await fileUpload({ multiple: multiple }) as any[]
+  formDatas.forEach((formDataItem: any) => {
     fileToRow(formDataItem, rows)
   })
 };
@@ -55,7 +53,7 @@ const fileToRow = async (formtDate: any, rows: any) => {
   for (let i = 0; i < rows.length; i++) {
     if (formtDate.get('file').name.includes(rows[i].key)) {
       ElMessage.success(rows[i].key)
-      
+
       // tableData.value[rows[i].index].data.push({
       //   name: formtDate.get('file').name,
       //   data: formtDate.get('file')
@@ -63,7 +61,7 @@ const fileToRow = async (formtDate: any, rows: any) => {
       tableData.value[rows[i].index].data[0] = {
         name: formtDate.get('file').name,
         data: formtDate.get('file')
-      }
+      } as never
       break;
     } else if (i === rows.length - 1) {
       // 文件名异常
@@ -97,7 +95,8 @@ const test = () => {
   dialogTableVisible.value = true;
 };
 
-onMounted(() => { });
+onMounted(() => {
+});
 </script>
 <template>
   <div class="test-container">
@@ -114,7 +113,9 @@ onMounted(() => { });
         <el-table-column prop="data" label="数据">
           <template #default="{ row }">
             <template v-for="(item, index) in row.data">
-              <a>{{item.name}}</a>
+              <div class="card-shadow">{{ item.name }}</div>
+              <!-- <el-card shadow="always">{{ item.name }}</el-card> -->
+              <!-- <el-image style="width: 100px; height: 100px" :src="item.data" fit="fill" /> -->
             </template>
           </template>
         </el-table-column>

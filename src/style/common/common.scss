@@ -350,6 +350,50 @@
 .position-fixed {
   position: fixed;
 }
+@for $i from 1 through 20 {
+  .fixed#{$i}-lt {
+    position: fixed;
+    left: #{$i}px !important;
+    top: #{$i}px!important;
+  }
+  .fixed#{$i}-rt {
+    position: fixed;
+    right: #{$i}px !important;
+    top: #{$i}px!important;
+  }
+  .fixed#{$i}-lb {
+    position: fixed;
+    left: #{$i}px !important;
+    bottom: #{$i}px!important;
+  }
+  .fixed#{$i}-rb {
+    position: fixed;
+    right: #{$i}px !important;
+    bottom: #{$i}px!important;
+  }
+
+  .absolute#{$i}-lt {
+    position: absolute;
+    left: #{$i}px !important;
+    top: #{$i}px!important;
+  }
+  .absolute#{$i}-rt {
+    position: absolute;
+    right: #{$i}px !important;
+    top: #{$i}px!important;
+  }
+  .absolute#{$i}-lb {
+    position: absolute;
+    left: #{$i}px !important;
+    bottom: #{$i}px!important;
+  }
+  .absolute#{$i}-rb {
+    position: absolute;
+    right: #{$i}px !important;
+    bottom: #{$i}px!important;
+  }
+  
+}
 
 // 卡片阴影
 .card-shadow {
