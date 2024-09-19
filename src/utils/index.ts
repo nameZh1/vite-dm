@@ -64,3 +64,32 @@ export const formatDate = (date: Date, format: string = 'YYYY-MM-DD'): string =>
     .replace('mm', minutes)
     .replace('ss', seconds);
 }
+
+/**
+ * 随机生成uuid
+ * @returns 
+ */
+export function generateUUID() {
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+    const r = Math.random() * 16 | 0, v = c === 'x' ? r : (r & 0x3 | 0x8);
+    return v.toString(16);
+  });
+}
+
+/**
+ * 字符串首字母大写
+ * @param str 字符串
+ * @returns 
+ */
+export function capitalize(str: string) {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
+/**
+ * 深拷贝对象
+ * @param obj 要克隆的对象
+ * @returns 
+ */
+export function deepClone<T>(obj: T): T {
+  return JSON.parse(JSON.stringify(obj));
+}
