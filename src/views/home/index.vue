@@ -55,7 +55,7 @@ onMounted(() => {
       <el-image class="w35 h35 mr20 card-shadow pointer" src="/src/assets/img/567.JPG" fit="contain" />
       <div>{{ info.title }}</div>
     </el-header>
-    <el-container>
+    <el-container class="scrollbar">
       <el-aside class='home-container-menu'>
         <ol
           :class="{ 'home-container-menu-item pointer transition-all text-bold': true, 'home-container-menu-item-pick': menuItem === menu.pickMenu }"
