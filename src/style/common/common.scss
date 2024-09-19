@@ -74,6 +74,15 @@
   }
 }
 
+@for $i from 5 through 50 {
+  .w#{$i * 10} {
+    width: #{$i * 10}px !important;
+  }
+  .h#{$i * 10} {
+    height: #{$i * 10}px !important;
+  }
+}
+
 /* Display 类名
 *********************** */
 .d-block {
@@ -177,7 +186,10 @@
 
 // flex 填充
 .flex-fill {
-  flex: 1;
+  flex: 1 !important;
+}
+.flex-shrink {
+  flex-shrink: 0 !important;
 }
 
 /* cursor 鼠标形状
@@ -197,24 +209,6 @@
 // 移动
 .cursor-move {
   cursor: move !important;
-}
-
-/* 宽高 100%
-*********************** */
-.w100 {
-  width: 100% !important;
-}
-.h100 {
-  height: 100% !important;
-}
-.vh100 {
-  height: 100vh !important;
-}
-.max100vh {
-  max-height: 100vh !important;
-}
-.min100vh {
-  min-height: 100vh !important;
 }
 
 /* 颜色值

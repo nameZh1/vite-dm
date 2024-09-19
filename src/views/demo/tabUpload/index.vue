@@ -1,7 +1,7 @@
 <script setup lang="ts" name="test">
+import { fileUpload } from '@/utils/fileUpload';
 import { ElMessage } from 'element-plus';
 import { onMounted, ref, computed } from 'vue';
-import { fileUpload } from '../../utils/fileUpload';
 
 
 // 弹框展示标识
