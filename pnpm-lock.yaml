@@ -11,6 +11,9 @@ dependencies:
   element-plus:
     specifier: ^2.8.1
     version: 2.8.1(vue@3.4.38)
+  jsplumb:
+    specifier: ^2.15.6
+    version: 2.15.6
   maptalks:
     specifier: 1.0.0-rc.37
     version: 1.0.0-rc.37
@@ -1604,6 +1607,10 @@ packages:
     optionalDependencies:
       graceful-fs: 4.2.11
     dev: true
+
+  /jsplumb@2.15.6:
+    resolution: {integrity: sha512-sIpbpz5eMVM+vV+MQzFCidlaa1RsknrQs6LOTKYDjYUDdTAi2AN2bFi94TxB33TifcIsRNV1jebcaxg0tCoPzg==}
+    dev: false
 
   /lineclip@1.1.5:
     resolution: {integrity: sha512-KlA/wRSjpKl7tS9iRUdlG72oQ7qZ1IlVbVgHwoO10TBR/4gQ86uhKow6nlzMAJJhjCWKto8OeoAzzIzKSmN25A==}
