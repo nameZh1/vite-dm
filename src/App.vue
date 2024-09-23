@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
 import { prettyLog } from './utils/prettyLog';
-import { formatDate } from './utils';
-import page567 from './assets/img/567.jpg'
 
 // 主题切换
 const currentTheme = ref('theme-light');

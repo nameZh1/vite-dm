@@ -15,14 +15,14 @@ const info = reactive({
 const menu = reactive<Menu>({
   pickMenu: {
     id: '1',
-    name: 'map',
-    component: markRaw(Map)
+    name: 'test',
+    component: markRaw(Test)
   },
   menuList: [
     {
       id: '1',
-      name: 'map',
-      component: markRaw(Map)
+      name: 'test',
+      component: markRaw(Test)
     },
     {
       id: '2',
@@ -36,9 +36,9 @@ const menu = reactive<Menu>({
     },
     {
       id: '4',
-      name: 'test',
-      component: markRaw(Test)
-    }
+      name: 'map',
+      component: markRaw(Map)
+    },
   ],
   pickHandle: (item) => {
     menu.pickMenu = item
