@@ -1,11 +1,25 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
+import { prettyLog } from './utils/prettyLog';
+import { formatDate } from './utils';
+import page567 from './assets/img/567.jpg'
 
+// 主题切换
 const currentTheme = ref('theme-light');
-
 const toggleTheme = () => {
   currentTheme.value = currentTheme.value === 'theme-dark' ? 'theme-light' : 'theme-dark';
 };
+
+// say hi
+const log = prettyLog()
+
+
+onMounted(() => {
+  log.sayHi()
+})
+
+
+
 </script>
 
 <template>
