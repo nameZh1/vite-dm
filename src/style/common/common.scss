@@ -296,6 +296,12 @@
   cursor: pointer;
 }
 
+// 禁用事件
+.event-none {
+  pointer-events: none;
+}
+
+
 // 加载
 /* loading-container 用于包裹整个页面的loading效果 */
 .loading {

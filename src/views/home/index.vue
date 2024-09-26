@@ -69,7 +69,9 @@ onMounted(() => {
         </transition>
       </el-main>
     </el-container>
-    <el-footer class="d-flex flex-row justify-center align-center">footer</el-footer>
+    <el-footer class="d-flex flex-row justify-center align-center">
+      <Hitokoto y="99%"/>
+    </el-footer>
   </el-container>
 </template>
 
@@ -109,11 +111,13 @@ onMounted(() => {
 }
 
 /* 定义过渡动画效果 */
-.fade-enter-active, .fade-leave-active {
+.fade-enter-active,
+.fade-leave-active {
   transition: opacity 0.5s ease;
 }
 
-.fade-enter-from, .fade-leave-to {
+.fade-enter-from,
+.fade-leave-to {
   opacity: 0;
 }
 </style>
