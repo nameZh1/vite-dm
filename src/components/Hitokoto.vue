@@ -1,31 +1,34 @@
 <script setup lang="ts" name="hitokoto">
-import { hitokotoAPI } from '@/services/common';
-import { onMounted, onUnmounted, ref } from 'vue';
+import { hitokotoAPI } from "@/services/common";
+import { onMounted, onUnmounted, ref } from "vue";
 
 // 传参
 const props = defineProps({
   x: {
     type: String,
-    default: '50%',
+    default: "50%",
   },
   y: {
     type: String,
-    default: '50%',
-  }
+    default: "50%",
+  },
 });
 // 逐个打字效果
 const displayedText = ref("loading...");
 const useTypingEffect = (text: string, delay: number = 500) => {
+  displayedText.value = "";
   let index = 0;
-  const interval = setInterval(() => {
+  interval.value = setInterval(() => {
     if (index < text.length) {
       displayedText.value += text[index];
       index++;
     } else {
-      clearInterval(interval);
+      displayedText.value = "";
+      index = 0;
+      // clearInterval(interval);
     }
   }, delay);
-}
+};
 
 // 一言对象
 interface Hitokoto {
@@ -44,30 +47,37 @@ interface Hitokoto {
 }
 const HitokotoObj = ref<Hitokoto>();
 const updateInt = ref();
+const interval = ref();
 const getHitokotoObj = () => {
-  hitokotoAPI().then(res => {
+  hitokotoAPI().then((res) => {
     HitokotoObj.value = res.data;
-    useTypingEffect(HitokotoObj.value!.hitokoto);
-  })
-}
+    useTypingEffect(
+      `${HitokotoObj.value!.hitokoto}   ---${HitokotoObj.value!.from_who}    `,
+      200
+    );
+  });
+};
 onMounted(() => {
-  // getHitokotoObj();
+  getHitokotoObj();
 
   // updateInt.value = setInterval(() => {
   //   getHitokotoObj
   // }, 1000 * 6)
-})
-
+});
 
 onUnmounted(() => {
-  clearInterval(updateInt.value)
-})
-
+  clearInterval(updateInt.value);
+  clearInterval(interval.value);
+});
 </script>
 
 <template>
-  <div class="hitokoto-container position-fixed event-none translate-x-50 translate-y-50"
-    :style="{ left: x, top: y, transform: 'translate(-50%, -150%)' }">{{ displayedText }}</div>
+  <div
+    class="hitokoto-container position-fixed event-none translate-x-50 translate-y-50"
+    :style="{ left: x, top: y, transform: 'translate(-50%, -150%)' }"
+  >
+    {{ displayedText }}
+  </div>
 </template>
 
 <style scoped lang="scss">
