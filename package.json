@@ -17,8 +17,6 @@
   "dependencies": {
     "axios": "^1.7.5",
     "element-plus": "^2.8.1",
-    "jsplumb": "^2.15.6",
-    "@jsplumbtoolkit/browser-ui-vue3":"6.71.0",
     "maptalks": "1.0.0-rc.37",
     "vue": "^3.4.37",
     "vue-router": "^4.4.3"

@@ -50,7 +50,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <el-container class="w100v h100v">
+  <el-container class="h100v">
     <el-header class="d-flex flex-row justify-center align-center text-bold font20">
       <el-image class="w35 h35 mr20 card-shadow pointer" src="/src/assets/img/567.JPG" fit="contain" />
       <div>{{ info.title }}</div>

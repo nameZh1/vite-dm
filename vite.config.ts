@@ -33,5 +33,6 @@ export default defineConfig(({ mode }) => {
     define: {
       __APP_NAME__: JSON.stringify(env.VITE_APP_NAME), // 使用 env
     },
+    assetsInclude: ['**/*.JPG'],
   };
 });
