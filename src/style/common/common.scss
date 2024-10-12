@@ -1,24 +1,48 @@
-/* Margin 类名
+/*  Margin 类名
+    Padding 类名
 *********************** */
-.ml10 {
-  margin-left: 10px;
-}
-.mr10 {
-  margin-right: 10px;
-}
-.mt10 {
-  margin-top: 10px;
-}
-.mb10 {
-  margin-bottom: 10px;
-}
-.mx10 {
-  margin-left: 10px;
-  margin-right: 10px;
-}
-.my10 {
-  margin-top: 10px;
-  margin-bottom: 10px;
+@for $i from 1 through 50 {
+  .ml#{$i} {
+    margin-left: #{$i}px !important;
+  }
+  .mr#{$i} {
+    margin-right: #{$i}px !important;
+  }
+  .mt#{$i} {
+    margin-top: #{$i}px !important;
+  }
+  .mb#{$i} {
+    margin-bottom: #{$i}px !important;
+  }
+  .mx#{$i} {
+    margin-left: #{$i}px !important;
+    margin-right: #{$i}px !important;
+  }
+  .my#{$i} {
+    margin-top: #{$i}px !important;
+    margin-bottom: #{$i}px !important;
+  }
+  
+  .pdl#{$i} {
+    padding-left: #{$i}px !important;
+  }
+  .pdr#{$i} {
+    padding-right: #{$i}px !important;
+  }
+  .pdt#{$i} {
+    padding-top: #{$i}px !important;
+  }
+  .pdb#{$i} {
+    padding-bottom: #{$i}px !important;
+  }
+  .pdx#{$i} {
+    padding-left: #{$i}px !important;
+    padding-right: #{$i}px !important;
+  }
+  .pdy#{$i} {
+    padding-top: #{$i}px !important;
+    padding-bottom: #{$i}px !important;
+  }
 }
 
 /* Padding 类名
@@ -52,6 +76,13 @@
 .h100v {
   height: 100vh;
 }
+.w75v {
+  width: 75vw;
+}
+.h75v {
+  height: 75vh;
+}
+
 .w100p {
   width: 100%;
 }
@@ -242,7 +273,7 @@
 *********************** */
 @for $i from 1 through 35 {
   .mg#{$i} {
-    margin: #{$i}px!important;
+    margin: #{$i}px !important;
   }
   .mt#{$i} {
     margin-top: #{$i}px !important;
@@ -257,7 +288,7 @@
     margin-left: #{$i}px !important;
   }
   .pd#{$i} {
-    padding: #{$i}px!important;
+    padding: #{$i}px !important;
   }
   .pt#{$i} {
     padding-top: #{$i}px !important;
@@ -301,11 +332,9 @@
   pointer-events: none;
 }
 
-
 // 加载
 /* loading-container 用于包裹整个页面的loading效果 */
 .loading {
-
   /* 使用 ::before 伪元素实现加载动画 */
   &::before {
     position: absolute;
@@ -378,45 +407,44 @@
   .fixed#{$i}-lt {
     position: fixed;
     left: #{$i}px !important;
-    top: #{$i}px!important;
+    top: #{$i}px !important;
   }
   .fixed#{$i}-rt {
     position: fixed;
     right: #{$i}px !important;
-    top: #{$i}px!important;
+    top: #{$i}px !important;
   }
   .fixed#{$i}-lb {
     position: fixed;
     left: #{$i}px !important;
-    bottom: #{$i}px!important;
+    bottom: #{$i}px !important;
   }
   .fixed#{$i}-rb {
     position: fixed;
     right: #{$i}px !important;
-    bottom: #{$i}px!important;
+    bottom: #{$i}px !important;
   }
 
   .absolute#{$i}-lt {
     position: absolute;
     left: #{$i}px !important;
-    top: #{$i}px!important;
+    top: #{$i}px !important;
   }
   .absolute#{$i}-rt {
     position: absolute;
     right: #{$i}px !important;
-    top: #{$i}px!important;
+    top: #{$i}px !important;
   }
   .absolute#{$i}-lb {
     position: absolute;
     left: #{$i}px !important;
-    bottom: #{$i}px!important;
+    bottom: #{$i}px !important;
   }
   .absolute#{$i}-rb {
     position: absolute;
     right: #{$i}px !important;
-    bottom: #{$i}px!important;
+    bottom: #{$i}px !important;
   }
-  
 }
 
 // 卡片阴影

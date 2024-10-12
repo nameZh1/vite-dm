@@ -1,5 +1,5 @@
 <script setup lang="ts" name="hitokoto">
-import { hitokotoAPI } from "@/services/common";
+import { hitokotoAPI, myHitokotoAPI } from "@/services/common";
 import { onMounted, onUnmounted, ref } from "vue";
 
 // 传参
@@ -49,6 +49,8 @@ const HitokotoObj = ref<Hitokoto>();
 const updateInt = ref();
 const interval = ref();
 const getHitokotoObj = () => {
+  myHitokotoAPI('http://127.0.0.1:5500/version.json')
+  
   hitokotoAPI().then((res) => {
     HitokotoObj.value = res.data;
     useTypingEffect(

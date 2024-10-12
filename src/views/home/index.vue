@@ -50,8 +50,8 @@ onMounted(() => {
 </script>
 
 <template>
-  <el-container class="h100v">
-    <el-header class="d-flex flex-row justify-center align-center text-bold font20">
+  <el-container class="home-container h100v w100v">
+    <el-header class="home-container-top d-flex flex-row justify-center align-center text-bold font20 my20 mx20">
       <el-image class="w35 h35 mr20 card-shadow pointer" src="/src/assets/img/567.JPG" fit="contain" />
       <div>{{ info.title }}</div>
     </el-header>
@@ -70,15 +70,22 @@ onMounted(() => {
       </el-main>
     </el-container>
     <el-footer class="d-flex flex-row justify-center align-center">
-      <Hitokoto y="99%"/>
+      <Hitokoto y="99%" />
     </el-footer>
   </el-container>
 </template>
 
 <style scoped lang="scss">
 .home-container {
-  background-color: var(--el-bg-color-page);
+  // background-color: var(--el-bg-color-page);
   color: var(--el-text-color-primary);
+  flex-shrink: 0;
+  padding: 0 200px;
+
+  &-top {
+    border-radius: 8px;
+    background-color: var(--el-bg-color);
+  }
 
   &-menu {
     width: 200px;
