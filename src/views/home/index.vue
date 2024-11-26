@@ -1,11 +1,13 @@
 <script setup lang="ts" name="home">
-import { markRaw, reactive, onMounted } from 'vue';
+import { markRaw, reactive, onMounted, defineAsyncComponent, ref } from 'vue';
 import { Menu } from '@/models/home';
 import Map from '@/views/map/index.vue'
 import Log from '@/views/log/index.vue'
 import Test from '@/views/test/index.vue'
 import Login from '@/admin/login/index.vue'
+import Css from '@/views/css/index.vue'
 
+const GoTop = defineAsyncComponent(() => import('@/components/GoTop.vue'))
 
 const info = reactive({
   title: import.meta.env.VITE_APP_NAME,
@@ -38,6 +40,11 @@ const menu = reactive<Menu>({
       id: '4',
       name: 'map',
       component: markRaw(Map)
+    },
+    {
+      id: '5',
+      name: 'css',
+      component: markRaw(Css)
     },
   ],
   pickHandle: (item) => {
@@ -72,6 +79,7 @@ onMounted(() => {
     <el-footer class="d-flex flex-row justify-center align-center">
       <Hitokoto y="99%" />
     </el-footer>
+    <GoTop />
   </el-container>
 </template>
 

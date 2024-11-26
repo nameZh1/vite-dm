@@ -3,7 +3,7 @@ import { onMounted, ref } from "vue";
 import { prettyLog } from "./utils/prettyLog";
 
 // 主题切换
-const currentTheme = ref("theme-dark");
+const currentTheme = ref("theme-light");
 const toggleTheme = () => {
   currentTheme.value =
     currentTheme.value === "theme-dark" ? "theme-light" : "theme-dark";
@@ -18,12 +18,12 @@ onMounted(() => {
 </script>
 
 <template>
-  <el-button class="change_btn" @click="toggleTheme">切换主题</el-button>
-  <HomeGo>
-    <template #main>
-      <router-view :class="[currentTheme, 'allStyle_control']" />
-    </template>
-  </HomeGo>
+  <!-- <el-button class="change_btn" @click="toggleTheme">切换主题</el-button> -->
+  <!-- <HomeGo> -->
+  <!-- <template #main> -->
+  <router-view :class="[currentTheme, 'allStyle_control']" />
+  <!-- </template> -->
+  <!-- </HomeGo> -->
 </template>
 
 <style lang="scss">
