@@ -17,15 +17,27 @@ function letsgo() {
     justify-content: center;
     align-items: center;
     z-index: 9999; /* 确保在最上层 */
-    transition: none; /* 移除之前的过渡效果 */
+    pointer-events: none; /* 防止点击穿透 */
+    opacity: 1; /* 初始状态为不可见 */
+    animation: fadeIn 1s forwards; /* 应用显示动画 */
 }
 
 .loading-animation.hidden {
-    animation: slideOut 1s forwards; /* 应用新的动画 */
+    animation: slideOut 1s forwards !important; /* 应用消失动画并确保优先级 */
     pointer-events: none; /* 防止点击穿透 */
 }
 
-/* 新的关键帧动画 */
+/* 显示动画 */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+/* 消失动画 */
 @keyframes slideOut {
     0% {
         clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%,0% 100%);
@@ -117,13 +129,25 @@ function letsgo() {
     window.addEventListener('load', () => {
         const loadingAnimation = document.getElementById('loading-animation');
         if (loadingAnimation) {
-            setTimeout(() => {
-                loadingAnimation.classList.add('hidden'); // 添加 hidden 类以触发消失动画
-                setTimeout(() => {
-                    loadingAnimation.style.display = 'none'; // 动画结束后隐藏元素
-                }, 500); // 与过渡时间一致
-            }, 1500)
-
+            // 添加一个监听器来等待显示动画结束
+            loadingAnimation.addEventListener('animationend', function onAnimationEnd(event) {
+                // 如果是显示动画结束
+                if (event.animationName === 'fadeIn') {
+                    // 移除显示动画类
+                    // loadingAnimation.classList.remove('loading-animation');
+                    // 添加消失动画类
+                    setTimeout(() => {
+                        loadingAnimation.classList.add('hidden');
+                    }, 1500)
+                }
+                // 如果是消失动画结束
+                else if (event.animationName === 'slideOut') {
+                    // 完全隐藏元素
+                    loadingAnimation.style.display = 'none';
+                    // 移除此监听器
+                    loadingAnimation.removeEventListener('animationend', onAnimationEnd);
+                }
+            });
         }
     });
 }
