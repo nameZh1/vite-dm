@@ -19,12 +19,7 @@ function letsgo() {
     z-index: 9999; /* 确保在最上层 */
     pointer-events: none; /* 防止点击穿透 */
     opacity: 1; /* 初始状态为不可见 */
-    animation: fadeIn 1s forwards; /* 应用显示动画 */
-}
-
-.loading-animation.hidden {
-    animation: slideOut 1s forwards !important; /* 应用消失动画并确保优先级 */
-    pointer-events: none; /* 防止点击穿透 */
+    animation: fadeIn .5s forwards, slideOut 1.5s 1.5s forwards; /* 第一个动画执行.5s，第二个动画延迟1.5s执行 1.5s */
 }
 
 /* 显示动画 */
@@ -136,9 +131,9 @@ function letsgo() {
                     // 移除显示动画类
                     // loadingAnimation.classList.remove('loading-animation');
                     // 添加消失动画类
-                    setTimeout(() => {
-                        loadingAnimation.classList.add('hidden');
-                    }, 1500)
+                    // setTimeout(() => {
+                    //     loadingAnimation.classList.add('hidden');
+                    // }, 1500)
                 }
                 // 如果是消失动画结束
                 else if (event.animationName === 'slideOut') {

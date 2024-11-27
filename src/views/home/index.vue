@@ -79,7 +79,7 @@ onMounted(() => {
     <el-footer class="d-flex flex-row justify-center align-center">
       <Hitokoto y="99%" />
     </el-footer>
-    <GoTop />
+    <!-- <GoTop /> -->
   </el-container>
 </template>
 

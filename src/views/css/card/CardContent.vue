@@ -1,9 +1,15 @@
 <template>
     <el-dialog v-model="dialogTableVisible" :title="card?.name" width="80%" v-loading="loading" fullscreen>
+        <template #title>
+            <div class="d-flex align-center w100p">
+                <span>{{ card?.name }}</span>
+                <el-button class="ml10" type="primary" @click="updateCompiledContentKey">刷新</el-button>
+            </div>
+        </template>
         <div class="card-content">
             <template v-if="card">
                 <div class="demo-container">
-                    <div v-html="compiledContent" class="demo"></div>
+                    <div :key="'compiledContent' + compiledContentKey" v-html="compiledContent" class="demo"></div>
                 </div>
                 <el-collapse v-model="activeNames">
                     <el-collapse-item title="源码" name="1">
@@ -22,7 +28,6 @@
                                     </el-form-item>
                                 </el-col>
                             </el-row>
-                            <!-- <el-button type="primary" @click="runCode" style="margin-top: 10px;">运行</el-button> -->
                         </div>
                     </el-collapse-item>
                 </el-collapse>
@@ -72,10 +77,13 @@ const compiledContent = computed(() => {
     return `<style>${css.value}</style>${content.value}`;
 });
 
-const runCode = () => {
-    content.value = content.value;
-    css.value = css.value;
+// 刷新页面
+const compiledContentKey = ref(0)
+const updateCompiledContentKey = () => {
+    compiledContentKey.value++
 };
+
+
 
 // 打开弹框
 const openDialog = (cardObj: Card) => {

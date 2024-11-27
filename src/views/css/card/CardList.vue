@@ -1,20 +1,23 @@
 <template>
     <div class="card-list">
+        <el-badge :value="12" class="item">
+            <el-button text>#</el-button>
+        </el-badge>
         <div class="cards">
             <div v-for="(card, index) in displayedCards" :key="'card' + index" class="card" @click="goToCard(card)">
                 <h3>{{ card.name }}</h3>
-
                 <!-- <el-tooltip effect="dark" :content="card.description" placement="bottom-start"> -->
                 <p>{{ card.description }}</p>
                 <!-- </el-tooltip> -->
                 <el-row class="mt10">
-                    <span
-                        :class="{ 'card-from1': card.from == 'net', 'card-from2': card.from !== 'net', 'mr10': true }">{{
+                    <span :class="{ 'card-from1': card.from == 'net', 'card-from2': card.from !== 'net', 'mr10': true }"
+                        @click.stop="filterHandle(card.from, 'from')">{{
                             card.from
                                 ==
-                        'net'? '网络':'非网络' }}</span>
-                    <el-tooltip effect="dark" :content="'作者:' + card.author" placement="bottom-start">
-                        <div class="ellipsis card-author">{{ card.author }}</div>
+                                'net' ? '网络' : '非网络' }}</span>
+                    <el-tooltip v-for="(at, atIndex) in card.author" :key="'at' + atIndex" effect="dark"
+                        :content="'作者:' + at" placement="bottom-start">
+                        <div class="ellipsis card-author mr10" @click.stop="filterHandle(at, 'author')">{{ at }}</div>
                     </el-tooltip>
                 </el-row>
 
@@ -61,6 +64,15 @@ const handleSizeChange = (newPage: number) => {
 };
 
 provide('cards', cards);
+
+/**
+ * 筛选
+ * @param value 
+ * @param key 
+ */
+const filterHandle = (value: any, key: string) => {
+}
+
 </script>
 
 <style lang="scss" scoped>
