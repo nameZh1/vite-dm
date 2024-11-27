@@ -43,7 +43,7 @@ const menu = reactive<Menu>({
     },
     {
       id: '5',
-      name: 'css',
+      name: 'CSS DEMO',
       component: markRaw(Css)
     },
   ],

@@ -1,16 +1,14 @@
 <template>
-    <el-dialog v-model="dialogTableVisible" :title="card?.name" width="1200" v-loading="loading">
+    <el-dialog v-model="dialogTableVisible" :title="card?.name" width="80%" v-loading="loading" fullscreen>
         <div class="card-content">
             <template v-if="card">
-                <h1>{{ card.name }}</h1>
-                <p>{{ card.description }}</p>
                 <div class="demo-container">
                     <div v-html="compiledContent" class="demo"></div>
                 </div>
                 <el-collapse v-model="activeNames">
                     <el-collapse-item title="源码" name="1">
                         <div class="code-editor">
-                            <el-row :gutter="24">
+                            <el-row :gutter="12">
                                 <el-col :span="12">
                                     <el-form-item label="CSS">
                                         <codemirror v-model="css" :options="cmOptionsCSS" placeholder="请输入CSS代码">
@@ -18,7 +16,7 @@
                                     </el-form-item>
                                 </el-col>
                                 <el-col :span="12">
-                                    <el-form-item label="内容">
+                                    <el-form-item label="HTML5">
                                         <codemirror v-model="content" :options="cmOptionsHTML" placeholder="请输入HTML内容">
                                         </codemirror>
                                     </el-form-item>
@@ -97,9 +95,11 @@ defineExpose({
 
 <style scoped lang="scss">
 .card-content {
-    max-width: 1100px;
+    max-height: 85vh;
+    // width: 100%;
+    overflow: auto;
     margin: 0 auto;
-    padding: 20px;
+    padding: 0 10px;
 }
 
 .demo-container {
