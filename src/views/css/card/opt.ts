@@ -2485,7 +2485,11 @@ const cards: Card[] = [
 ];
 
 const useCardsOpt = () => {
-	return { cards };
+	const dictMap = {
+		net: '网络',
+		my: '非网络'
+	}
+	return { cards, dictMap };
 };
 
 export { useCardsOpt };

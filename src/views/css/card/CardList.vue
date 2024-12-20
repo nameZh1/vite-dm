@@ -1,7 +1,7 @@
 <template>
     <div class="card-list">
-        <el-badge :value="12" class="item">
-            <el-button text>#</el-button>
+        <el-badge v-for="(item, index) in filterList" :key="index" :value="item.count" class="item">
+            <el-button text>#{{ item.label }}</el-button>
         </el-badge>
         <div class="cards">
             <div v-for="(card, index) in displayedCards" :key="'card' + index" class="card" @click="goToCard(card)">
@@ -35,9 +35,10 @@ import { ref, computed, onMounted, defineAsyncComponent } from 'vue';
 import { provide } from 'vue';
 import { ElPagination } from 'element-plus';
 import { useCardsOpt } from './opt';
+import { fromType } from './types';
 const CardContent = defineAsyncComponent(() => import('./CardContent.vue'))
 
-const { cards } = useCardsOpt();
+const { cards, dictMap } = useCardsOpt();
 
 const currentPage = ref(1);
 const itemsPerPage = ref(10);
@@ -70,7 +71,40 @@ provide('cards', cards);
  * @param value 
  * @param key 
  */
-const filterHandle = (value: any, key: string) => {
+const filterList = ref({} as any)
+
+const filterHandle = (value: any | fromType, key: string) => {
+
+    let cout = 0
+    cards.forEach(card => {
+        if (key == 'from') {
+            if (card.from == value) {
+                cout++;
+            }
+        } else {
+            if (card.author.includes(value)) {
+                cout++;
+            }
+        }
+    })
+
+    if (key == 'from') {
+        filterList.value[value] = {
+            key: key,
+            label: dictMap[value as fromType],
+            value: value,
+            count: cout
+        }
+    } else {
+        filterList.value[value] = {
+            key: key,
+            label: value,
+            value: value,
+            count: cout
+        }
+    }
+
+
 }
 
 </script>
