@@ -8,4 +8,5 @@ export interface Card {
   description: string;
   content: string;
   css: string;
+  javascript?: string;
 }

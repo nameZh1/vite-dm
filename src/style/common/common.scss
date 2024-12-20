@@ -463,7 +463,136 @@
   }
 }
 
-// 滚动
-.scrollbar {
+
+/* color background-color
+*********************** */
+// 一般颜色
+.black-color {
+  color: #000000;
+}
+.white-color {
+  color: #ffffff;
+}
+.transparent-color {
+  color: transparent;
+}
+// 状态颜色
+.primary-color {
+  color: #409eff;
+}
+.success-color {
+  color: #67c23a;
+}
+.warning-color {
+  color: #e6a23c;
+}
+.danger-color {
+  color: #f56c6c;
+}
+.info-color {
+  color: #909399;
+}
+// 文字颜色
+.text-color1 {
+  color: #303133;
+}
+.text-color2 {
+  color: #606266;
+}
+.text-color3 {
+  color: #909399;
+}
+.text-color4 {
+  color: #c0c4cc;
+}
+// 边界颜色
+.border-color1 {
+  color: #dcdfe6;
+}
+.border-color2 {
+  color: #e4e7ed;
+}
+.border-color3 {
+  color: #ebeef5;
+}
+.border-color4 {
+  color: #f2f6fc;
+}
+
+.primary-bg-color {
+  background-color: #409eff;
+}
+.success-bg-color {
+  background-color: #67c23a;
+}
+.warning-bg-color {
+  background-color: #e6a23c;
+}
+.danger-bg-color {
+  background-color: #f56c6c;
+}
+.info-bg-color {
+  background-color: #909399;
+}
+
+/* 动画
+*********************** */
+
+@keyframes lp-animation-1 {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes lp-animation-2 {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes jello-horizontal {
+  0% {
+    transform: scale3d(1, 1, 1);
+  }
+
+  30% {
+    transform: scale3d(1.05, 0.95, 1);
+  }
+
+  40% {
+    transform: scale3d(0.95, 1.05, 1);
+  }
+
+  50% {
+    transform: scale3d(1.05, 0.95, 1);
+  }
+
+  65% {
+    transform: scale3d(0.95, 1.05, 1);
+  }
+
+  75% {
+    transform: scale3d(1.05, 0.95, 1);
+  }
+
+  100% {
+    transform: scale3d(1, 1, 1);
+  }
+}
+
+/* 滚动条
+*********************** */
+
+.overflow-auto {
   overflow: auto;
 }
+.overflow-hidden {
+  overflow: hidden;
+}
+
