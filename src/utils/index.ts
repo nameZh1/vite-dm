@@ -70,7 +70,7 @@ export const formatDate = (date: Date, format: string = 'YYYY-MM-DD'): string =>
  * @returns 
  */
 export function generateUUID() {
-  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
     const r = Math.random() * 16 | 0, v = c === 'x' ? r : (r & 0x3 | 0x8);
     return v.toString(16);
   });
@@ -92,4 +92,28 @@ export function capitalize(str: string) {
  */
 export function deepClone<T>(obj: T): T {
   return JSON.parse(JSON.stringify(obj));
+}
+
+/**
+ * 数组转对象
+ * @param arr 
+ * @param keyField key
+ * @returns 
+ */
+export function arrayToObject(arr: any[], keyField: string) {
+  if (!Array.isArray(arr)) {
+    throw new Error('First argument must be an array');
+  }
+  if (typeof keyField !== 'string') {
+    throw new Error('Key field must be a string');
+  }
+
+  return arr.reduce((obj, item) => {
+    if (item.hasOwnProperty(keyField)) {
+      obj[item[keyField]] = { ...item }; // 或者直接赋值 item 如果不需要深拷贝
+    } else {
+      console.warn(`Item missing the key field ${keyField}:`, item);
+    }
+    return obj;
+  }, {});
 }
