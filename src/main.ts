@@ -1,6 +1,9 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 
+import VNetworkGraph from "v-network-graph"
+import "v-network-graph/lib/style.css"
+
 const app = createApp(App);
 
 // 样式
@@ -22,5 +25,6 @@ import router from "@/router/index";
 app.use(ElementPlus, {
   locale: zhCn
 })
+app.use(VNetworkGraph)
 app.use(router)
 app.mount('#app')
